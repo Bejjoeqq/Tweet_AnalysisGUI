@@ -64,6 +64,7 @@ Set these variables in `getTweet()`:
 - `tokenSecret`
 
 Without valid credentials, tweet retrieval will fail.
+**Security recommendation:** do not keep credentials hardcoded in source files for shared or production use. Prefer environment variables or a local untracked config file.
 
 ## Running the Application
 
@@ -135,6 +136,7 @@ Tweets are normalized by:
 
 ## Security Considerations
 
+- **IMPORTANT:** do not deploy this project to production before the SQL query construction issue is fixed.
 - SQL queries in current data filtering paths are built with string formatting.
 - The primary affected path is date-filter query construction in `cli.py` and `gui.py` (executed through `connection.select()` in `connection.py`).
 - This should be treated as a high-priority security fix and replaced with parameterized queries.
