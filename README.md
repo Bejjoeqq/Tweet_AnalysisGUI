@@ -16,16 +16,16 @@ A simple Python application to collect Indonesian tweets with Tweepy, store them
 
 ## Project Structure
 
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/app.py` – application entry point (choose CLI or GUI)
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/cli.py` – CLI flow/menu
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/gui.py` – Tkinter GUI flow
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/twitter.py` – tweet retrieval and preprocessing
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/connection.py` – SQLite CRUD helpers
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/analysis.py` – lexicon-based sentiment logic
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/plot.py` – chart generation with Matplotlib
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/kata_positif.txt` – positive words lexicon
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/kata_negatif.txt` – negative words lexicon
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/tweet.db` – SQLite database
+- `app.py` – application entry point (choose CLI or GUI)
+- `cli.py` – CLI flow/menu
+- `gui.py` – Tkinter GUI flow
+- `twitter.py` – tweet retrieval and preprocessing
+- `connection.py` – SQLite CRUD helpers
+- `analysis.py` – lexicon-based sentiment logic
+- `plot.py` – chart generation with Matplotlib
+- `kata_positif.txt` – positive words lexicon
+- `kata_negatif.txt` – negative words lexicon
+- `tweet.db` – SQLite database
 
 ## Requirements
 
@@ -42,7 +42,7 @@ A simple Python application to collect Indonesian tweets with Tweepy, store them
 
 1. Open terminal in the repository:
    ```bash
-   cd /home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI
+   cd Tweet_AnalysisGUI
    ```
 2. (Recommended) create and activate a virtual environment.
 3. Install dependencies:
@@ -54,7 +54,7 @@ A simple Python application to collect Indonesian tweets with Tweepy, store them
 
 Before running the app, add your credentials in:
 
-- `/home/runner/work/Tweet_AnalysisGUI/Tweet_AnalysisGUI/twitter.py`
+- `twitter.py`
 
 Set these variables in `getTweet()`:
 
