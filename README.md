@@ -88,7 +88,7 @@ Calculates sentiment scores for tweets where `sentimen IS NULL`.
 
 Scoring approach:
 
-- `sentiment = (count of matched positive words) - (count of matched negative words)`
+- `sentiment = count_positive - count_negative`
 
 ### 3) Lihat Data
 Shows tweets between two dates (`yyyy-mm-dd`).
@@ -131,7 +131,7 @@ Tweets are normalized by:
 
 - Sentiment analysis is simple lexicon matching (no context/negation handling)
 - Search keyword and language are hardcoded in `twitter.py`
-- Date filtering uses direct SQL string formatting
+- Date filtering uses direct SQL string formatting (should be replaced with parameterized queries to reduce SQL injection risk)
 - Credentials are currently read from source code variables
 
 ## Notes for Improvement
