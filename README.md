@@ -1,0 +1,151 @@
+# Tweet Analysis GUI
+
+A simple Python application to collect Indonesian tweets with Tweepy, store them in SQLite, run lexicon-based sentiment scoring, and view results through either a CLI or Tkinter GUI.
+
+## Features
+
+- Fetch tweets from Twitter/X using Tweepy (`twitter.py`)
+- Save tweet data into a local SQLite database (`tweet.db`)
+- Compute sentiment scores using positive/negative word lists
+- View tweet records filtered by date range
+- Visualize sentiment distribution with a bar chart
+- Show summary statistics (mean, median, standard deviation)
+- Two interfaces:
+  - Command-line interface (CLI)
+  - Desktop graphical interface (GUI via Tkinter)
+
+## Project Structure
+
+- `app.py` – application entry point (choose CLI or GUI)
+- `cli.py` – CLI flow/menu
+- `gui.py` – Tkinter GUI flow
+- `twitter.py` – tweet retrieval and preprocessing
+- `connection.py` – SQLite CRUD helpers
+- `analysis.py` – lexicon-based sentiment logic
+- `plot.py` – chart generation with Matplotlib
+- `kata_positif.txt` – positive words lexicon
+- `kata_negatif.txt` – negative words lexicon
+- `tweet.db` – SQLite database
+
+## Requirements
+
+- Python 3.8+
+- Internet access for tweet retrieval
+- Python packages:
+  - `tweepy`
+  - `pandas`
+  - `numpy`
+  - `matplotlib`
+- Tkinter (usually bundled with standard Python installations)
+
+## Installation
+
+1. Open terminal in the repository:
+   ```bash
+   cd Tweet_AnalysisGUI
+   ```
+2. (Recommended) create and activate a virtual environment.
+3. Install dependencies:
+   ```bash
+   pip install tweepy pandas numpy matplotlib
+   ```
+
+## Twitter API Configuration
+
+Before running the app, add your credentials in:
+
+- `twitter.py`
+
+Set these variables in `getTweet()`:
+
+- `key`
+- `secretKey`
+- `token`
+- `tokenSecret`
+
+Without valid credentials, tweet retrieval will fail.
+**Security recommendation:** do not keep credentials hardcoded in source files for shared or production use. Prefer environment variables or a local untracked config file.
+
+## Running the Application
+
+From repository root:
+
+```bash
+python app.py
+```
+
+You will be prompted:
+
+- `cli` → run command-line mode
+- `gui` → open Tkinter desktop app
+
+## Usage Workflow
+
+### 1) Update Data
+Fetches recent tweets (query currently fixed to `vaksin covid`) and stores new records into `tweet.db`.
+
+### 2) Update Nilai Sentiment
+Calculates sentiment scores for tweets where `sentimen IS NULL`.
+
+Scoring approach:
+
+- `sentiment = count_positive - count_negative`
+
+### 3) Lihat Data
+Shows tweets between two dates (`yyyy-mm-dd`).
+
+### 4) Visualisasi
+Builds a sentiment-frequency bar chart and displays:
+
+- Mean sentiment
+- Median sentiment
+- Standard deviation
+
+## Database
+
+The app uses SQLite with table `data`:
+
+- `tweet_id` (PRIMARY KEY)
+- `screen_name`
+- `tweet_text`
+- `tanggal`
+- `sentimen` (nullable until analyzed)
+
+## Text Preprocessing
+
+Tweets are normalized by:
+
+- removing mentions (`@user`)
+- removing URLs
+- removing non-alphanumeric symbols
+- converting to lowercase
+
+## Troubleshooting
+
+- **`No module named tweepy` (or others):** install dependencies with `pip install ...`
+- **No tweets fetched:** verify API credentials and network connectivity
+- **GUI does not open:** ensure Tkinter is available in your Python installation
+- **Sentiment values not changing:** run "Update Nilai Sentiment" after fetching new data
+- **Database appears stale:** ensure you are running from repository root so `tweet.db` and lexicon files resolve correctly
+
+## Known Limitations
+
+- Sentiment analysis is simple lexicon matching (no context/negation handling)
+- Search keyword and language are hardcoded in `twitter.py`
+- Credentials are currently read from source code variables
+
+## Security Considerations
+
+- **IMPORTANT:** do not deploy this project to production before the SQL query construction issue is fixed.
+- SQL queries in current data filtering paths are built with string formatting.
+- The primary affected path is date-filter query construction in `cli.py` and `gui.py` (executed through `connection.select()` in `connection.py`).
+- This should be treated as a high-priority security fix and replaced with parameterized queries.
+
+## Notes for Improvement
+
+- Prioritize refactoring SQL query construction to parameterized queries across data access paths
+- Move API credentials to environment variables
+- Add configurable search query/date range
+- Add automated tests and dependency file (`requirements.txt`)
+- Improve sentiment model (stemming, negation, weighting)
+- Parameterize database path and add migration/init scripts
