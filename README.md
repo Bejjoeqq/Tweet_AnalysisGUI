@@ -131,8 +131,12 @@ Tweets are normalized by:
 
 - Sentiment analysis is simple lexicon matching (no context/negation handling)
 - Search keyword and language are hardcoded in `twitter.py`
-- Date filtering uses direct SQL string formatting (should be replaced with parameterized queries to reduce SQL injection risk)
 - Credentials are currently read from source code variables
+
+## Security Considerations
+
+- SQL queries in current data filtering paths are built with string formatting.
+- This should be treated as a high-priority security fix and replaced with parameterized queries.
 
 ## Notes for Improvement
 
