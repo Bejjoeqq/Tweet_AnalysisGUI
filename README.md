@@ -136,6 +136,7 @@ Tweets are normalized by:
 ## Security Considerations
 
 - SQL queries in current data filtering paths are built with string formatting.
+- The primary affected path is date-filter query construction in `cli.py` and `gui.py` (executed through `connection.select()` in `connection.py`).
 - This should be treated as a high-priority security fix and replaced with parameterized queries.
 
 ## Notes for Improvement
