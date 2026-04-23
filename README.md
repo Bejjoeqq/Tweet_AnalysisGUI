@@ -136,6 +136,7 @@ Tweets are normalized by:
 
 ## Notes for Improvement
 
+- Prioritize refactoring SQL query construction to parameterized queries across data access paths
 - Move API credentials to environment variables
 - Add configurable search query/date range
 - Add automated tests and dependency file (`requirements.txt`)
